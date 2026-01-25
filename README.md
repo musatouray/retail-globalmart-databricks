@@ -7,12 +7,13 @@ Designed as both a **learning project and a portfolio-grade implementation** ali
 
 ---
 
-### 🏗️ Architecture
+### 🏗️ Medallion Architecture
 - Databricks with Unity Catalog for governance
 - Medallion Architecture (Bronze / Silver / Gold)
 - Kimball-style Star Schema (facts and dimensions)
 - Power BI for analytics and reporting
 
+![Medallion Architecture](docs/global_mart_retail_Medallion_Architecture.png)
 ---
 
 ### 📈 Data Flow
