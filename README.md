@@ -7,12 +7,13 @@ Designed as both a **learning project and a portfolio-grade implementation** ali
 
 ---
 
-### 🏗️ Architecture
+### 🏗️ Medallion Architecture
 - Databricks with Unity Catalog for governance
 - Medallion Architecture (Bronze / Silver / Gold)
 - Kimball-style Star Schema (facts and dimensions)
 - Power BI for analytics and reporting
 
+![Medallion Architecture](docs/global_mart_retail_Medallion_Architecture.png)
 ---
 
 ### 📈 Data Flow
@@ -39,7 +40,7 @@ Raw CSV → Bronze → Silver → Gold → Star Schema → Power BI
 - Enriched, business-ready fact-level order data (`orders_gold`)
 - Dimensional modeling for BI and analytics use cases
 
-### 🧠 Data Modeling Notes
+### 🧠 Data Modeling
 - Fact table grain: one row per order line
 - Surrogate keys used for all dimensions
 - Dimensions implemented as SCD Type 1
