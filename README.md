@@ -39,7 +39,7 @@ Raw CSV → Bronze → Silver → Gold → Star Schema → Power BI
 - Enriched, business-ready fact-level order data (`orders_gold`)
 - Dimensional modeling for BI and analytics use cases
 
-### 🧠 Data Modeling Notes
+### 🧠 Data Modeling
 - Fact table grain: one row per order line
 - Surrogate keys used for all dimensions
 - Dimensions implemented as SCD Type 1
