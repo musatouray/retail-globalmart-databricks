@@ -1,0 +1,102 @@
+table dim_customers
+	lineageTag: 96463a11-7961-4b8a-8287-b0ec159b0f89
+
+	column customer_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 3cec1855-11aa-461b-988d-a374d4f8c417
+		summarizeBy: none
+		sourceColumn: customer_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: f83a37b4-2375-422f-a94c-56b43fff6111
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_name
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: bc267902-c483-48cc-ae9e-ebe9a5418555
+		summarizeBy: none
+		sourceColumn: customer_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column segment
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: 2c322579-90e9-4c9e-9950-bb3893610a9a
+		summarizeBy: none
+		sourceColumn: segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_order_date
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: 0ee45654-ee78-4f34-979e-7dbc4b2fcddc
+		summarizeBy: none
+		sourceColumn: first_order_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column last_order_date
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: 17a527c2-9631-4709-85c9-0f6a2fcfd129
+		summarizeBy: none
+		sourceColumn: last_order_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column total_orders
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 8691197c-a1c7-4c52-8270-ada671056658
+		summarizeBy: none
+		sourceColumn: total_orders
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_status
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: ef809a5f-3a64-4d07-9531-2584ef904c78
+		summarizeBy: none
+		sourceColumn: customer_status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_customers = m
+		mode: directQuery
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-a00e21c3-4879.cloud.databricks.com", "/sql/1.0/warehouses/241bd8c1ba6b3df1", [Catalog = "", Database = ""]),
+				    gold_dev_Database = Source{[Name="gold_dev",Kind="Database"]}[Data],
+				    global_mart_retail_Schema = gold_dev_Database{[Name="global_mart_retail",Kind="Schema"]}[Data],
+				    dim_customers_Table = global_mart_retail_Schema{[Name="dim_customers",Kind="Table"]}[Data],
+				    #"Removed Other Columns" = Table.SelectColumns(dim_customers_Table,{"customer_key", "customer_id", "customer_name", "segment", "first_order_date", "last_order_date", "total_orders", "customer_status"})
+				in
+				    #"Removed Other Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

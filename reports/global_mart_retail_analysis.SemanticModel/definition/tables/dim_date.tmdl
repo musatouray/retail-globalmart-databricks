@@ -1,0 +1,189 @@
+table dim_date
+	lineageTag: 4719ad01-0ed7-46c1-ac1b-42cdeda790d6
+
+	column date
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: 971b0dcf-7e2e-4008-9343-e333b40c7efc
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2e25354b-503c-4e3b-ae32-4e5a53ac7d12
+		summarizeBy: none
+		sourceColumn: date_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 6c98e949-74b5-4cda-b60c-1215a33c884f
+		summarizeBy: none
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column quarter
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 58ecf080-3cea-4708-99e1-da68cb547825
+		summarizeBy: none
+		sourceColumn: quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column quarter_name
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: 5f796d7f-2f6e-4ec7-8118-c5a9dd3b67f9
+		summarizeBy: none
+		sourceColumn: quarter_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 1b29f6aa-1ece-4d5f-b9d4-36c782e9e1c9
+		summarizeBy: none
+		sourceColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_name
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: 1428d020-b49c-40f7-961f-91e036b9d2a0
+		summarizeBy: none
+		sourceColumn: month_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_short
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: c8410d6d-2461-450e-bdf9-64d013689ce5
+		summarizeBy: none
+		sourceColumn: month_short
+
+		annotation SummarizationSetBy = Automatic
+
+	column week_of_year
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 196d490f-8f93-4791-8af7-4fcba88d3042
+		summarizeBy: none
+		sourceColumn: week_of_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column day
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 5ed3a6c9-e1f3-4f31-ab0a-fc140b42cf5b
+		summarizeBy: none
+		sourceColumn: day
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_name
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: d2fd1d6c-c3cb-4c62-a5b6-b61f6034f10c
+		summarizeBy: none
+		sourceColumn: day_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_short
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: 513e2c1f-8e54-4a07-b4d3-285ba25c15e1
+		summarizeBy: none
+		sourceColumn: day_short
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_of_week
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 1d21bac3-9c0e-4482-b2a7-4a68cae80283
+		summarizeBy: none
+		sourceColumn: day_of_week
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_weekend
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: e61778c2-09ea-4ecb-9190-d445e3d84a25
+		summarizeBy: none
+		sourceColumn: is_weekend
+
+		annotation SummarizationSetBy = Automatic
+
+	column current_week_offset
+		dataType: double
+		sourceProviderType: double
+		lineageTag: 240768b6-0d8b-4608-beb9-f0617e6aa4dc
+		summarizeBy: none
+		sourceColumn: current_week_offset
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column current_month_offset
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 5f600f22-c686-4495-959b-5f216038a50c
+		summarizeBy: none
+		sourceColumn: current_month_offset
+
+		annotation SummarizationSetBy = Automatic
+
+	column current_year_offset
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 29a548a6-d771-4e1b-9c11-3b229d3e6ed4
+		summarizeBy: none
+		sourceColumn: current_year_offset
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_date = m
+		mode: directQuery
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-a00e21c3-4879.cloud.databricks.com", "/sql/1.0/warehouses/241bd8c1ba6b3df1", [Catalog = "", Database = ""]),
+				    gold_dev_Database = Source{[Name="gold_dev",Kind="Database"]}[Data],
+				    global_mart_retail_Schema = gold_dev_Database{[Name="global_mart_retail",Kind="Schema"]}[Data],
+				    dim_date_Table = global_mart_retail_Schema{[Name="dim_date",Kind="Table"]}[Data]
+				in
+				    dim_date_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

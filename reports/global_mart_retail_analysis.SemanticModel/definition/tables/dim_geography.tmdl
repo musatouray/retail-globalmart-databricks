@@ -1,0 +1,77 @@
+table dim_geography
+	lineageTag: dcc62d9b-6d85-4cfd-9a9a-adf36dfbfd61
+
+	column geography_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2ef87966-40e2-4235-9769-3a330cdfaa81
+		summarizeBy: none
+		sourceColumn: geography_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: d9afdcee-9aa2-4706-aea3-c83dee9ba540
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column region
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: 2ed5ebc8-9c4a-4b40-b2a0-65a0648b4b7e
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: 658b32c5-6b60-41e4-948b-f902c35a61d4
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: a278916d-dda1-4e8a-a9a9-0218a0dc9ba0
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column postal_code
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: 0edab540-9b6c-4e36-ac6d-8c2a35bc77a7
+		summarizeBy: none
+		sourceColumn: postal_code
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_geography = m
+		mode: directQuery
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-a00e21c3-4879.cloud.databricks.com", "/sql/1.0/warehouses/241bd8c1ba6b3df1", [Catalog = "", Database = ""]),
+				    gold_dev_Database = Source{[Name="gold_dev",Kind="Database"]}[Data],
+				    global_mart_retail_Schema = gold_dev_Database{[Name="global_mart_retail",Kind="Schema"]}[Data],
+				    dim_geography_Table = global_mart_retail_Schema{[Name="dim_geography",Kind="Table"]}[Data],
+				    #"Removed Other Columns" = Table.SelectColumns(dim_geography_Table,{"geography_key", "country", "region", "state", "city", "postal_code"})
+				in
+				    #"Removed Other Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

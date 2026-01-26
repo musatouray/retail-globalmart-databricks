@@ -1,0 +1,272 @@
+table fact_sales
+	lineageTag: 2733d3ce-107c-4505-aea1-233e558f2390
+
+	column order_line_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 4315c931-be29-456e-b76b-38e8a8701739
+		summarizeBy: sum
+		sourceColumn: order_line_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 51f3f0a1-43c7-4d55-aa3e-051d548cf9cb
+		summarizeBy: none
+		sourceColumn: customer_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ab017569-f278-4651-8ef3-d9e043206573
+		summarizeBy: none
+		sourceColumn: product_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column geography_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 59b00e84-ff99-47c9-b04b-cc38bc5b3bee
+		summarizeBy: none
+		sourceColumn: geography_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 43367755-f0a8-4387-a06f-e3d6c46e2910
+		summarizeBy: none
+		sourceColumn: order_date_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ship_date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 38a5083d-72ea-4295-aa28-1b8be877f002
+		summarizeBy: sum
+		sourceColumn: ship_date_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: b3ce4276-6154-4f16-8506-e9792793cd3e
+		summarizeBy: none
+		sourceColumn: order_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ship_date
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: 2ad1dca7-b023-49e8-a7b5-b65481a5dbae
+		summarizeBy: none
+		sourceColumn: ship_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column order_id
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: c4a8acb4-4cbb-46b6-856c-9bf1f2ac00c4
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column ship_mode
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: 2b3ba0b6-f051-4fa6-b52d-401829476ae9
+		summarizeBy: none
+		sourceColumn: ship_mode
+
+		annotation SummarizationSetBy = Automatic
+
+	column sales
+		dataType: double
+		sourceProviderType: double
+		lineageTag: 853bea3c-a367-4d8a-a415-524ba99dd3dd
+		summarizeBy: sum
+		sourceColumn: sales
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column quantity
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 4f6d5b82-4dce-4da0-b219-226bd3571542
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column discount
+		dataType: double
+		sourceProviderType: double
+		lineageTag: c97dbc34-8f56-438f-9fa5-f36a23b389dc
+		summarizeBy: sum
+		sourceColumn: discount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column profit
+		dataType: double
+		sourceProviderType: double
+		lineageTag: 011992df-d6a6-4821-bf34-0d0b323a6662
+		summarizeBy: sum
+		sourceColumn: profit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column unit_price
+		dataType: double
+		sourceProviderType: double
+		lineageTag: 60f8dcd9-30bf-4603-b46d-bea1bd459150
+		summarizeBy: sum
+		sourceColumn: unit_price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column profit_per_unit
+		dataType: double
+		sourceProviderType: double
+		lineageTag: b8f163b0-e591-4bad-b9ec-bf941eba44f5
+		summarizeBy: sum
+		sourceColumn: profit_per_unit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column profit_margin
+		dataType: double
+		sourceProviderType: double
+		lineageTag: 7d30649d-77e9-42ab-8e3c-ddbe34d57610
+		summarizeBy: sum
+		sourceColumn: profit_margin
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column discount_bucket
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: df04314b-51ef-4d93-8323-2de68ffd3761
+		summarizeBy: none
+		sourceColumn: discount_bucket
+
+		annotation SummarizationSetBy = Automatic
+
+	column delivery_days
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2f453ad5-2b9e-47f9-8969-5fb4d2d472a1
+		summarizeBy: sum
+		sourceColumn: delivery_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_prime_delivery
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 18a17007-a3ab-4def-bf54-19c3f447b388
+		summarizeBy: none
+		sourceColumn: is_prime_delivery
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_profitable
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: c5eaf357-ab66-4baf-bf0d-f00c79b302c8
+		summarizeBy: none
+		sourceColumn: is_profitable
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_size
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: 97da56f8-25a7-4512-96fb-13e1c9739730
+		summarizeBy: none
+		sourceColumn: order_size
+
+		annotation SummarizationSetBy = Automatic
+
+	column transaction_type
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: 6941effd-12d3-4f08-8891-aafce17aaf81
+		summarizeBy: none
+		sourceColumn: transaction_type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_sales = m
+		mode: directQuery
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-a00e21c3-4879.cloud.databricks.com", "/sql/1.0/warehouses/241bd8c1ba6b3df1", [Catalog = "", Database = ""]),
+				    gold_dev_Database = Source{[Name="gold_dev",Kind="Database"]}[Data],
+				    global_mart_retail_Schema = gold_dev_Database{[Name="global_mart_retail",Kind="Schema"]}[Data],
+				    fact_sales_Table = global_mart_retail_Schema{[Name="fact_sales",Kind="Table"]}[Data],
+				    #"Removed Other Columns" = Table.SelectColumns(fact_sales_Table,{"order_line_id", "customer_key", "product_key", "geography_key", "order_date_key", "ship_date_key", "order_date", "ship_date", "order_id", "ship_mode", "sales", "quantity", "discount", "profit", "unit_price", "profit_per_unit", "profit_margin", "discount_bucket", "delivery_days", "is_prime_delivery", "is_profitable", "order_size", "transaction_type"})
+				in
+				    #"Removed Other Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
