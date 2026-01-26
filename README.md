@@ -51,7 +51,7 @@ Raw CSV → Bronze → Silver → Gold → Star Schema → Power BI
 - `dim_geography`
 - `dim_date`
 - `fact_sales`
-
+![ERD](docs/global_mart_retail_ERD.png)
 ---
 
 ### 🔄 Orchestration
