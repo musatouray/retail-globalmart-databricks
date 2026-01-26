@@ -1,0 +1,68 @@
+table dim_products
+	lineageTag: 9e76e619-a476-45a0-ad90-5dbcd84edb8f
+
+	column product_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 463893ce-91cd-4706-85c7-0859086c9496
+		summarizeBy: none
+		sourceColumn: product_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: 4f66431f-adc5-4809-8514-41d9b8a0a62f
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_name
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: 9f2f1a84-0ac5-4e1d-90ef-88b172f58655
+		summarizeBy: none
+		sourceColumn: product_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: 81e67030-0558-4475-b2d2-edfc77b16474
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column sub_category
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: 4ba2f65a-b57b-4dc4-9db7-45713a037ebd
+		summarizeBy: none
+		sourceColumn: sub_category
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_products = m
+		mode: directQuery
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-a00e21c3-4879.cloud.databricks.com", "/sql/1.0/warehouses/241bd8c1ba6b3df1", [Catalog = "", Database = ""]),
+				    gold_dev_Database = Source{[Name="gold_dev",Kind="Database"]}[Data],
+				    global_mart_retail_Schema = gold_dev_Database{[Name="global_mart_retail",Kind="Schema"]}[Data],
+				    dim_products_Table = global_mart_retail_Schema{[Name="dim_products",Kind="Table"]}[Data],
+				    #"Removed Other Columns" = Table.SelectColumns(dim_products_Table,{"product_key", "product_id", "product_name", "category", "sub_category"})
+				in
+				    #"Removed Other Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

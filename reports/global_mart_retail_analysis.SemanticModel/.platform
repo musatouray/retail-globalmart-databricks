@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "global_mart_retail_analysis"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "5f4cfbdd-76b9-44f7-99b0-496d006733e3"
+  }
+}
