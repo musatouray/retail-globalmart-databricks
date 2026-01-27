@@ -1,6 +1,7 @@
 model Model
 	culture: en-US
 	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
 	sourceQueryCulture: en-US
 	dataAccessOptions
 		legacyRedirects
@@ -10,13 +11,17 @@ annotation __PBI_TimeIntelligenceEnabled = 0
 
 annotation PBI_QueryOrder = ["dim_customers","dim_date","dim_geography","dim_products","fact_sales"]
 
-annotation PBI_ProTooling = ["DevMode"]
+annotation PBI_ProTooling = ["DevMode","MCP-PBIModeling"]
 
 ref table dim_customers
 ref table dim_date
 ref table dim_geography
 ref table dim_products
 ref table fact_sales
+ref table Metrics
+ref table 'Rolling Periods'
+ref table 'Time Comparison'
+ref table Period-to-Date
 
 ref cultureInfo en-US
 

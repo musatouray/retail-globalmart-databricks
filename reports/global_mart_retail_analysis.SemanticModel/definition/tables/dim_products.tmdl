@@ -51,7 +51,7 @@ table dim_products
 		annotation SummarizationSetBy = Automatic
 
 	partition dim_products = m
-		mode: directQuery
+		mode: import
 		source =
 				let
 				    Source = DatabricksMultiCloud.Catalogs("dbc-a00e21c3-4879.cloud.databricks.com", "/sql/1.0/warehouses/241bd8c1ba6b3df1", [Catalog = "", Database = ""]),
