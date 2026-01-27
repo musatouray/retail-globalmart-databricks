@@ -1,0 +1,278 @@
+/// Centralized measure table for all business metrics
+table Metrics
+	lineageTag: 2744cb1b-823c-459c-bd3d-d94ad8356cad
+
+	/// Total revenue from all sales transactions
+	measure 'Total Sales' = SUM(fact_sales[sales])
+		formatString: $#,0.00
+		displayFolder: Base Metrics
+		lineageTag: ade27b32-9126-4900-ab4e-50b333012023
+
+	/// Total units sold across all transactions
+	measure 'Total Quantity' = SUM(fact_sales[quantity])
+		formatString: #,0
+		displayFolder: Base Metrics
+		lineageTag: 19f25cb8-d3b9-4dd6-82f4-650e0220aed5
+
+	/// Total profit from all sales transactions
+	measure 'Total Profit' = SUM(fact_sales[profit])
+		formatString: $#,0.00
+		displayFolder: Base Metrics
+		lineageTag: 91a2c471-81b4-4377-a437-c81ad93da86f
+
+	/// Count of unique orders placed
+	measure 'Total Orders' = DISTINCTCOUNT(fact_sales[order_id])
+		formatString: #,0
+		displayFolder: Base Metrics
+		lineageTag: b558a07c-b6cf-4433-99ac-6c78b36b666f
+
+	/// Total number of line items across all orders
+	measure 'Total Order Lines' = COUNTROWS(fact_sales)
+		formatString: #,0
+		displayFolder: Base Metrics
+		lineageTag: 3a9f248e-a074-4e60-9df5-75ef7953d3e4
+
+	/// Count of unique customers who made purchases
+	measure 'Unique Customers' = DISTINCTCOUNT(fact_sales[customer_key])
+		formatString: #,0
+		displayFolder: Base Metrics
+		lineageTag: 685441b3-eb53-4d26-a389-778d158baafb
+
+	/// Average revenue per order
+	measure 'Avg Order Value' = DIVIDE([Total Sales], [Total Orders], 0)
+		formatString: $#,0.00
+		displayFolder: Averages
+		lineageTag: 144395ea-97f5-4c38-966d-57b4c2e0f482
+
+	/// Average revenue per unique customer
+	measure 'Avg Sales Per Customer' = DIVIDE([Total Sales], [Unique Customers], 0)
+		formatString: $#,0.00
+		displayFolder: Averages
+		lineageTag: 63926d3c-3252-4f75-819d-2d6161434c3a
+
+	/// Average units sold per order
+	measure 'Avg Quantity Per Order' = DIVIDE([Total Quantity], [Total Orders], 0)
+		formatString: #,0.0
+		displayFolder: Averages
+		lineageTag: 1dbe1616-e7cb-489e-89a7-0e7ffd6a82c8
+
+	/// Average price per unit sold
+	measure 'Avg Unit Price' = DIVIDE([Total Sales], [Total Quantity], 0)
+		formatString: $#,0.00
+		displayFolder: Averages
+		lineageTag: 127b3f9c-fc1b-4605-a03e-551770f30fe1
+
+	/// Profit as percentage of sales revenue
+	measure 'Profit Margin %' = DIVIDE([Total Profit], [Total Sales], 0)
+		formatString: 0.00%
+		displayFolder: Profitability
+		lineageTag: 7772852b-9ed3-4e10-ac22-0a4f6d27fd65
+
+	/// Ratio of profit to sales (same as profit margin)
+	measure 'Profit Ratio' = DIVIDE([Total Profit], [Total Sales], 0)
+		formatString: 0.00
+		displayFolder: Profitability
+		lineageTag: 0d112cac-f107-4b91-8cbd-a6debef7548e
+
+	/// Total cost of goods sold
+	measure 'Total Cost' = [Total Sales] - [Total Profit]
+		formatString: $#,0.00
+		displayFolder: Profitability
+		lineageTag: 4459e7af-3e7a-48ba-9cac-b1d80fd9bc44
+
+	/// Average profit earned per order
+	measure 'Avg Profit Per Order' = DIVIDE([Total Profit], [Total Orders], 0)
+		formatString: $#,0.00
+		displayFolder: Profitability
+		lineageTag: f35d9d27-f49e-4074-95db-329b1c595f6a
+
+	/// Average profit per unique customer
+	measure 'Avg Profit Per Customer' = DIVIDE([Total Profit], [Unique Customers], 0)
+		formatString: $#,0.00
+		displayFolder: Profitability
+		lineageTag: 7b4b95ef-cd8b-413e-bbc3-7af896cec32d
+
+	/// Year-to-date total sales
+	measure 'Sales YTD' = TOTALYTD([Total Sales], dim_date[date])
+		formatString: $#,0.00
+		displayFolder: Time Intelligence\Sales
+		lineageTag: f7cae092-10c9-4bf8-950c-46524a9f6756
+
+	/// Prior year-to-date total sales
+	measure 'Sales PYTD' = CALCULATE([Sales YTD], SAMEPERIODLASTYEAR(dim_date[date]))
+		formatString: $#,0.00
+		displayFolder: Time Intelligence\Sales
+		lineageTag: d7ca8fa9-6deb-4eaf-8d5b-38fc97456d17
+
+	/// Year-over-year sales growth amount
+	measure 'Sales YoY Growth' = [Total Sales] - [Sales PY]
+		formatString: $#,0.00
+		displayFolder: Time Intelligence\Sales
+		lineageTag: 2d1301be-8837-4822-b26d-6d569338c68c
+
+	/// Year-over-year sales growth percentage
+	measure 'Sales YoY Growth %' = DIVIDE([Sales YoY Growth], [Sales PY], 0)
+		formatString: 0.00%
+		displayFolder: Time Intelligence\Sales
+		lineageTag: ee13a899-040d-47be-80e5-fa4461b25d57
+
+	/// Total sales for same period last year
+	measure 'Sales PY' = CALCULATE([Total Sales], SAMEPERIODLASTYEAR(dim_date[date]))
+		formatString: $#,0.00
+		displayFolder: Time Intelligence\Sales
+		lineageTag: 5c8063c9-6135-4072-8de6-1cba40d5045f
+
+	/// Month-to-date total sales
+	measure 'Sales MTD' = TOTALMTD([Total Sales], dim_date[date])
+		formatString: $#,0.00
+		displayFolder: Time Intelligence\Sales
+		lineageTag: 86ec10fc-22dd-4a41-b2a8-e679643a5efe
+
+	/// Quarter-to-date total sales
+	measure 'Sales QTD' = TOTALQTD([Total Sales], dim_date[date])
+		formatString: $#,0.00
+		displayFolder: Time Intelligence\Sales
+		lineageTag: e268d4cd-54e9-451c-b53c-9cb94efdd74f
+
+	/// Total sales for previous month
+	measure 'Sales PM' = CALCULATE([Total Sales], PREVIOUSMONTH(dim_date[date]))
+		formatString: $#,0.00
+		displayFolder: Time Intelligence\Sales
+		lineageTag: afcdbce0-a6a6-429f-a9c4-c7aadd2b5f92
+
+	/// Month-over-month sales growth percentage
+	measure 'Sales MoM Growth %' = DIVIDE([Total Sales] - [Sales PM], [Sales PM], 0)
+		formatString: 0.00%
+		displayFolder: Time Intelligence\Sales
+		lineageTag: 9aef3ad9-684e-4bf6-8707-8d56b5ff21f3
+
+	/// Year-to-date total profit
+	measure 'Profit YTD' = TOTALYTD([Total Profit], dim_date[date])
+		formatString: $#,0.00
+		displayFolder: Time Intelligence\Profit
+		lineageTag: c8f17ae6-d42e-4656-bfa2-b870b4332cf9
+
+	/// Total profit for same period last year
+	measure 'Profit PY' = CALCULATE([Total Profit], SAMEPERIODLASTYEAR(dim_date[date]))
+		formatString: $#,0.00
+		displayFolder: Time Intelligence\Profit
+		lineageTag: 44d76b41-ea43-43e6-9122-0b007d2a4d79
+
+	/// Year-over-year profit growth amount
+	measure 'Profit YoY Growth' = [Total Profit] - [Profit PY]
+		formatString: $#,0.00
+		displayFolder: Time Intelligence\Profit
+		lineageTag: 6be7c44d-8265-48fb-a724-476911d8d2de
+
+	/// Year-over-year profit growth percentage
+	measure 'Profit YoY Growth %' = DIVIDE([Profit YoY Growth], [Profit PY], 0)
+		formatString: 0.00%
+		displayFolder: Time Intelligence\Profit
+		lineageTag: b289b3fa-d78b-4ed8-b504-aa76180aa031
+
+	/// Month-to-date total profit
+	measure 'Profit MTD' = TOTALMTD([Total Profit], dim_date[date])
+		formatString: $#,0.00
+		displayFolder: Time Intelligence\Profit
+		lineageTag: 54389113-020d-48f3-8403-a16248c83cec
+
+	/// Quarter-to-date total profit
+	measure 'Profit QTD' = TOTALQTD([Total Profit], dim_date[date])
+		formatString: $#,0.00
+		displayFolder: Time Intelligence\Profit
+		lineageTag: 76515c56-56e8-4542-9b6c-26f56c923989
+
+	/// Year-to-date total orders
+	measure 'Orders YTD' = TOTALYTD([Total Orders], dim_date[date])
+		formatString: #,0
+		displayFolder: Time Intelligence\Orders
+		lineageTag: f36c02cc-8c29-4f83-b9f7-cc64bf71493b
+
+	/// Total orders for same period last year
+	measure 'Orders PY' = CALCULATE([Total Orders], SAMEPERIODLASTYEAR(dim_date[date]))
+		formatString: #,0
+		displayFolder: Time Intelligence\Orders
+		lineageTag: ed97c859-93cd-4d4a-972c-2272cf654360
+
+	/// Year-over-year orders growth percentage
+	measure 'Orders YoY Growth %' = DIVIDE([Total Orders] - [Orders PY], [Orders PY], 0)
+		formatString: 0.00%
+		displayFolder: Time Intelligence\Orders
+		lineageTag: 8c0b98ac-88fb-4a47-8ba4-619cef47c7ce
+
+	/// Year-to-date unique customers
+	measure 'Customers YTD' = CALCULATE([Unique Customers], DATESYTD(dim_date[date]))
+		formatString: #,0
+		displayFolder: Time Intelligence\Customers
+		lineageTag: 2e4e513a-3905-4435-8cbc-2f6cb7fd217e
+
+	/// Unique customers for same period last year
+	measure 'Customers PY' = CALCULATE([Unique Customers], SAMEPERIODLASTYEAR(dim_date[date]))
+		formatString: #,0
+		displayFolder: Time Intelligence\Customers
+		lineageTag: 78323b7e-d1e2-4cb7-ba16-20f1ce26a73d
+
+	/// Year-over-year customer growth percentage
+	measure 'Customers YoY Growth %' = DIVIDE([Unique Customers] - [Customers PY], [Customers PY], 0)
+		formatString: 0.00%
+		displayFolder: Time Intelligence\Customers
+		lineageTag: fe4f6a4c-fb88-4d02-9f4f-b7f56aeb087c
+
+	/// 3-month moving average of sales
+	measure 'Sales 3M Moving Avg' = AVERAGEX(DATESINPERIOD(dim_date[date], LASTDATE(dim_date[date]), -3, MONTH), [Total Sales])
+		formatString: $#,0.00
+		displayFolder: Time Intelligence\Moving Averages
+		lineageTag: 91aedd69-c20e-4197-8e9f-6732a650659e
+
+	/// 6-month moving average of sales
+	measure 'Sales 6M Moving Avg' = AVERAGEX(DATESINPERIOD(dim_date[date], LASTDATE(dim_date[date]), -6, MONTH), [Total Sales])
+		formatString: $#,0.00
+		displayFolder: Time Intelligence\Moving Averages
+		lineageTag: b98f1232-d97b-4a90-8993-ba3b577c4b35
+
+	/// Total discount amount given across all sales
+	measure 'Total Discount Amount' = SUMX(fact_sales, fact_sales[quantity] * fact_sales[unit_price] * fact_sales[discount])
+		formatString: $#,0.00
+		displayFolder: Discounts
+		lineageTag: 0a0c4b33-6b13-4cfc-9203-8d82356ef945
+
+	/// Average discount percentage across all transactions
+	measure 'Avg Discount %' = AVERAGE(fact_sales[discount])
+		formatString: 0.00%
+		displayFolder: Discounts
+		lineageTag: 06d5fbf7-95b1-4f59-8502-a1efe5341e60
+
+	/// Count of orders that included a discount
+	measure 'Orders With Discount' = CALCULATE([Total Orders], fact_sales[discount] > 0)
+		formatString: #,0
+		displayFolder: Discounts
+		lineageTag: 8f326297-25bb-482f-a9ac-4a2d5f15e12c
+
+	/// Percentage of orders that received a discount
+	measure 'Discount Rate %' = DIVIDE([Orders With Discount], [Total Orders], 0)
+		formatString: 0.00%
+		displayFolder: Discounts
+		lineageTag: 367f47c2-76f2-4340-9b27-6ca9d92a034f
+
+	/// Average number of days from order to delivery
+	measure 'Avg Delivery Days' = AVERAGE(fact_sales[delivery_days])
+		formatString: #,0.0
+		displayFolder: Operations
+		lineageTag: ed92c4a2-96f8-42cb-b963-ce7c3025a619
+
+	/// Count of orders with prime delivery
+	measure 'Orders Prime Delivery' = CALCULATE([Total Orders], fact_sales[is_prime_delivery] = TRUE)
+		formatString: #,0
+		displayFolder: Operations
+		lineageTag: 6cde5996-d9f5-4ee9-8eaa-7a3e93eaf7e3
+
+	column Metrics
+		isHidden
+		lineageTag: 124243c0-4ea8-402a-9fd7-f43216d29ec5
+		isNameInferred
+		sourceColumn: [Metrics]
+
+	partition Metrics = calculated
+		mode: import
+		source = ROW("Metrics", 1)
+

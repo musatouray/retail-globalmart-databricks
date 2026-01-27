@@ -1,0 +1,28 @@
+table 'Rolling Periods'
+	lineageTag: 246090fa-b82d-4ef6-a147-481e65f67acd
+
+	/// Dynamic time period calculations for rolling date ranges
+	calculationGroup
+		precedence: 10
+
+		/// No time modification - shows current period values
+		calculationItem 'Current Period' = SELECTEDMEASURE()
+
+		/// Values for the last 7 days
+		calculationItem 'Last 7 Days' = CALCULATE(SELECTEDMEASURE(), DATESINPERIOD(dim_date[date], LASTDATE(dim_date[date]), -7, DAY))
+
+		/// Values for the last 30 days
+		calculationItem 'Last 30 Days' = CALCULATE(SELECTEDMEASURE(), DATESINPERIOD(dim_date[date], LASTDATE(dim_date[date]), -30, DAY))
+
+		/// Values for the last 90 days
+		calculationItem 'Last 90 Days' = CALCULATE(SELECTEDMEASURE(), DATESINPERIOD(dim_date[date], LASTDATE(dim_date[date]), -90, DAY))
+
+		/// Values for the last 12 months
+		calculationItem 'Last 12 Months' = CALCULATE(SELECTEDMEASURE(), DATESINPERIOD(dim_date[date], LASTDATE(dim_date[date]), -12, MONTH))
+
+	column 'Rolling Periods'
+		dataType: string
+		lineageTag: bca1b755-4dff-42ab-92e9-1e1756c0c271
+
+	partition 'Partition_Rolling Periods' = calculationGroup
+

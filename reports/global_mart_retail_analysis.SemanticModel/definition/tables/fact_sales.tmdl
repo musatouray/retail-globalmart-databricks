@@ -81,7 +81,7 @@ table fact_sales
 
 	column order_date
 		dataType: dateTime
-		formatString: Long Date
+		formatString: Short Date
 		sourceProviderType: date
 		lineageTag: b3ce4276-6154-4f16-8506-e9792793cd3e
 		summarizeBy: none
@@ -93,7 +93,7 @@ table fact_sales
 
 	column ship_date
 		dataType: dateTime
-		formatString: Long Date
+		formatString: Short Date
 		sourceProviderType: date
 		lineageTag: 2ad1dca7-b023-49e8-a7b5-b65481a5dbae
 		summarizeBy: none
@@ -255,7 +255,7 @@ table fact_sales
 		annotation SummarizationSetBy = Automatic
 
 	partition fact_sales = m
-		mode: directQuery
+		mode: import
 		source =
 				let
 				    Source = DatabricksMultiCloud.Catalogs("dbc-a00e21c3-4879.cloud.databricks.com", "/sql/1.0/warehouses/241bd8c1ba6b3df1", [Catalog = "", Database = ""]),
