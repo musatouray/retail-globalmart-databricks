@@ -1,0 +1,36 @@
+table 'Time Comparison'
+	lineageTag: e89a9704-da84-4c98-9cba-30032d9c2109
+
+	/// Compare current period with previous periods
+	calculationGroup
+		precedence: 20
+
+		/// Current period value
+		calculationItem Current = SELECTEDMEASURE()
+
+		/// Same period in previous year
+		calculationItem 'Previous Year' = CALCULATE(SELECTEDMEASURE(), SAMEPERIODLASTYEAR(dim_date[date]))
+
+		/// Previous month
+		calculationItem 'Previous Month' = CALCULATE(SELECTEDMEASURE(), PREVIOUSMONTH(dim_date[date]))
+
+		/// Previous quarter
+		calculationItem 'Previous Quarter' = CALCULATE(SELECTEDMEASURE(), PREVIOUSQUARTER(dim_date[date]))
+
+		/// Year-over-year change amount
+		calculationItem 'YoY Change' = SELECTEDMEASURE() - CALCULATE(SELECTEDMEASURE(), SAMEPERIODLASTYEAR(dim_date[date]))
+
+		/// Year-over-year change percentage
+		calculationItem 'YoY Change %' =
+				VAR CurrentValue = SELECTEDMEASURE()
+				VAR PYValue = CALCULATE(SELECTEDMEASURE(), SAMEPERIODLASTYEAR(dim_date[date]))
+				RETURN DIVIDE(CurrentValue - PYValue, PYValue, BLANK())
+
+			formatStringDefinition = "0.00%"
+
+	column 'Time Comparison'
+		dataType: string
+		lineageTag: 0ff62f1c-6b83-4af7-ae46-66d00009a93b
+
+	partition 'Partition_Time Comparison' = calculationGroup
+

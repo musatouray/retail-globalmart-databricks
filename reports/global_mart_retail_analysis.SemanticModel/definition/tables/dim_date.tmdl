@@ -3,7 +3,7 @@ table dim_date
 
 	column date
 		dataType: dateTime
-		formatString: Long Date
+		formatString: Short Date
 		sourceProviderType: date
 		lineageTag: 971b0dcf-7e2e-4008-9343-e333b40c7efc
 		summarizeBy: none
@@ -172,8 +172,27 @@ table dim_date
 
 		annotation SummarizationSetBy = Automatic
 
+	column month_year
+		dataType: string
+		lineageTag: d4ea958e-cd69-4f53-a8ee-bd32aaac4bca
+		summarizeBy: none
+		sourceColumn: month_year
+		sortByColumn: month_year_key
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_year_key
+		dataType: string
+		lineageTag: 992ad4a6-339f-4358-b688-1240d2ec2aee
+		summarizeBy: none
+		sourceColumn: month_year_key
+
+		annotation SummarizationSetBy = Automatic
+
 	partition dim_date = m
-		mode: directQuery
+		mode: import
 		source =
 				let
 				    Source = DatabricksMultiCloud.Catalogs("dbc-a00e21c3-4879.cloud.databricks.com", "/sql/1.0/warehouses/241bd8c1ba6b3df1", [Catalog = "", Database = ""]),

@@ -1,0 +1,28 @@
+table Period-to-Date
+	lineageTag: 8dee095a-32d0-4b37-be3b-417ee5adbf27
+
+	/// Period-to-date calculations (MTD, QTD, YTD)
+	calculationGroup
+		precedence: 15
+
+		/// No period-to-date calculation applied
+		calculationItem 'No Calculation' = SELECTEDMEASURE()
+
+		/// Month-to-date cumulative total
+		calculationItem MTD = CALCULATE(SELECTEDMEASURE(), DATESMTD(dim_date[date]))
+
+		/// Quarter-to-date cumulative total
+		calculationItem QTD = CALCULATE(SELECTEDMEASURE(), DATESQTD(dim_date[date]))
+
+		/// Year-to-date cumulative total
+		calculationItem YTD = CALCULATE(SELECTEDMEASURE(), DATESYTD(dim_date[date]))
+
+		/// Prior year-to-date cumulative total
+		calculationItem PYTD = CALCULATE(SELECTEDMEASURE(), DATESYTD(dim_date[date]), SAMEPERIODLASTYEAR(dim_date[date]))
+
+	column Period-to-Date
+		dataType: string
+		lineageTag: 233ced5a-8cf8-4fb5-b662-e3766a8f236a
+
+	partition Partition_Period-to-Date = calculationGroup
+

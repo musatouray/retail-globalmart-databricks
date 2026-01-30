@@ -54,6 +54,24 @@ Raw CSV → Bronze → Silver → Gold → Star Schema → Power BI
 ![ERD](docs/global_mart_retail_ERD.png)
 ---
 
+### 🧪 Synthetic Data Generation & Backfill Simulation
+To simulate real-world production scenarios, a synthetic data generator is built using the original Superstore dataset as a baseline. This setup enables realistic experimentation with orchestration, scheduling, and historical data reprocessing, as it enables:
+- Generation of monthly raw data files beyond the original dataset
+- Parameterized backfills using Databricks widgets (start date, end date, data scale)
+- Simulation of late-arriving data
+- Controlled data volume growth via a rows_multiplier
+- Loading data at scale into partitioned raw data volumes (year-based)
+- Fully idempotent job runs, safe for reprocessing and retries
+---
+
 ### 🔄 Orchestration
 - Databricks Workflows for end-to-end pipeline execution
+- Parameterised jobs using widgets
 - Idempotent Delta MERGE operations for incremental and repeatable loads
+---
+
+### 📊 Analytics & CI/CD
+- Power BI used for analytics and reporting
+- Seamless deployment into Microsoft Fabric workspaces, using PBIP-based CI/CD pipeline, enabling automated publishing of:
+  - Power BI reports
+  - Semantic models
