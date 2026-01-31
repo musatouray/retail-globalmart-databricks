@@ -11,7 +11,7 @@ annotation __PBI_TimeIntelligenceEnabled = 0
 
 annotation PBI_QueryOrder = ["dim_customers","dim_date","dim_geography","dim_products","fact_sales"]
 
-annotation PBI_ProTooling = ["DevMode","MCP-PBIModeling"]
+annotation PBI_ProTooling = ["DevMode","MCP-PBIModeling","TMDLView_Desktop"]
 
 ref table dim_customers
 ref table dim_date

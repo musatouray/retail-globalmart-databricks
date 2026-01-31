@@ -59,6 +59,25 @@ table dim_geography
 
 		annotation SummarizationSetBy = Automatic
 
+	hierarchy Geography
+		lineageTag: b3fbc8de-668e-45ce-9fc0-80a6949a2485
+
+		level Country
+			lineageTag: f560892c-f27d-4fee-b18f-1130e380b25e
+			column: country
+
+		level Region
+			lineageTag: 9e177ead-4400-40f1-8cfb-36b097600d70
+			column: region
+
+		level State
+			lineageTag: cbc2ebe1-4c72-421e-948b-d64b139a0418
+			column: state
+
+		level City
+			lineageTag: 74c55ded-e703-4fd1-930a-67101d320845
+			column: city
+
 	partition dim_geography = m
 		mode: import
 		source =
