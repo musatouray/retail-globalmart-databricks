@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
-  "name": "ab5a9609023090d3e63b",
-  "displayName": "Summary",
+  "name": "d8aec827fa8bab4921ae",
+  "displayName": "Products Analysis",
   "displayOption": "FitToPage",
   "height": 1080,
   "width": 1920,

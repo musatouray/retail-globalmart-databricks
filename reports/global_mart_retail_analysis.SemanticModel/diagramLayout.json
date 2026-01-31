@@ -4,7 +4,7 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 0,
+        "x": 1294,
         "y": 0
       },
       "nodes": [
@@ -73,6 +73,58 @@
           },
           "zIndex": 4,
           "expandedHeight": 300
+        },
+        {
+          "location": {
+            "x": 871,
+            "y": 61
+          },
+          "nodeIndex": "Metrics",
+          "nodeLineageTag": "2744cb1b-823c-459c-bd3d-d94ad8356cad",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1155,
+            "y": 159
+          },
+          "nodeIndex": "Period-to-Date",
+          "nodeLineageTag": "8dee095a-32d0-4b37-be3b-417ee5adbf27",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1439,
+            "y": 159
+          },
+          "nodeIndex": "Rolling Periods",
+          "nodeLineageTag": "246090fa-b82d-4ef6-a147-481e65f67acd",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1723,
+            "y": 159
+          },
+          "nodeIndex": "Time Comparison",
+          "nodeLineageTag": "e89a9704-da84-4c98-9cba-30032d9c2109",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "All tables",

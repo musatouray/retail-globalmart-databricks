@@ -1,11 +1,13 @@
 table dim_date
 	lineageTag: 4719ad01-0ed7-46c1-ac1b-42cdeda790d6
+	dataCategory: Time
 
 	column date
 		dataType: dateTime
 		formatString: Short Date
 		sourceProviderType: date
 		lineageTag: 971b0dcf-7e2e-4008-9343-e333b40c7efc
+		dataCategory: PaddedDateTableDates
 		summarizeBy: none
 		sourceColumn: date
 
@@ -190,6 +192,25 @@ table dim_date
 		sourceColumn: month_year_key
 
 		annotation SummarizationSetBy = Automatic
+
+	hierarchy Calendar
+		lineageTag: 63a57240-47db-445e-ab22-15e92a8c5ded
+
+		level Year
+			lineageTag: b19af215-5df9-451d-8f83-c2bd5a4dcf5e
+			column: year
+
+		level Quarter
+			lineageTag: 0b38095d-a88d-4d1e-95a5-3de8a22e6498
+			column: quarter_name
+
+		level Month
+			lineageTag: 670dfb05-9dfd-4a26-810a-69dde0012090
+			column: month_name
+
+		level Date
+			lineageTag: cc4f5125-447b-4bed-96ce-576a1d0e8d2a
+			column: date
 
 	partition dim_date = m
 		mode: import

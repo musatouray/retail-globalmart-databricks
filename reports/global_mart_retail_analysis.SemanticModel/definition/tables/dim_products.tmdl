@@ -50,6 +50,21 @@ table dim_products
 
 		annotation SummarizationSetBy = Automatic
 
+	hierarchy Product
+		lineageTag: db2d22dd-545a-49e9-b0fa-5b95d588bfbf
+
+		level Category
+			lineageTag: 54d84f27-ce7f-4ece-aae7-287d1016430e
+			column: category
+
+		level 'Sub Category'
+			lineageTag: 8b5cf7cd-83e2-4116-8211-eb2ac08aa447
+			column: sub_category
+
+		level 'Product Name'
+			lineageTag: caec0ca5-f751-44ef-870d-d1e2886379ce
+			column: product_name
+
 	partition dim_products = m
 		mode: import
 		source =
